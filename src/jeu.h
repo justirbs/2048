@@ -34,4 +34,89 @@
 void ajoutTuile(int** tab, int n);
 
 
+/**
+ * \fn void deplacer(int** tab, int n)
+ *
+ * \author Justine Ribas <ribasjusti@eisti.eu>
+ * \version 0.1
+ * \date 30 mai 2020
+ *
+ * \brief permet de déplacer toutes les tuiles dans une direction
+ *
+ *
+ * \param tab le tableau à modifier
+ * \param n la taille du tableau
+ *
+ */
+void deplacer(int** tab, int n);
+
+
+/**
+ * \fn void deplacerDroite(int** tab, int n)
+ *
+ * \author Justine Ribas <ribasjusti@eisti.eu>
+ * \version 0.1
+ * \date 30 mai 2020
+ *
+ * \brief permet de déplacer toutes les tuiles vers la doite
+ *
+ *
+ * \param tab le tableau à modifier
+ * \param n la taille du tableau
+ *
+ */
+void deplacerDroite(int** tab, int n);
+
+
+/**
+ * \fn void deplacerGauche(int** tab, int n)
+ *
+ * \author Justine Ribas <ribasjusti@eisti.eu>
+ * \version 0.1
+ * \date 30 mai 2020
+ *
+ * \brief permet de déplacer toutes les tuiles vers la gauche
+ *
+ *
+ * \param tab le tableau à modifier
+ * \param n la taille du tableau
+ *
+ */
+void deplacerGauche(int** tab, int n);
+
+
+/**
+ * \fn void deplacerHaut(int** tab, int n)
+ *
+ * \author Justine Ribas <ribasjusti@eisti.eu>
+ * \version 0.1
+ * \date 30 mai 2020
+ *
+ * \brief permet de déplacer toutes les tuiles vers en haut
+ *
+ *
+ * \param tab le tableau à modifier
+ * \param n la taille du tableau
+ *
+ */
+void deplacerHaut(int** tab, int n);
+
+
+/**
+ * \fn void deplacerBas(int** tab, int n)
+ *
+ * \author Justine Ribas <ribasjusti@eisti.eu>
+ * \version 0.1
+ * \date 30 mai 2020
+ *
+ * \brief permet de déplacer toutes les tuiles vers en bas
+ *
+ *
+ * \param tab le tableau à modifier
+ * \param n la taille du tableau
+ *
+ */
+void deplacerBas(int** tab, int n);
+
+
 #endif

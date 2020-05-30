@@ -19,6 +19,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "jeu.h"
+#include "saisie.h"
 
 /**
  * \fn int** creerTabEntier2D(int n)
@@ -29,9 +31,9 @@
  *
  * \brief permet de créer un tableau à deux dimensions
  *
+ *
  * \param n la taille du tableau
  * \return tab l'adresse de la première case du tableau crée
- *
  *
  */
 int** creerTabEntier2D(int n);
@@ -64,12 +66,9 @@ void afficherTab(int** tab, int n);
  *
  * \param tab le tableau à supprimer
  * \param n la taille du tableau
- * \return le tableau agrandi
  *
  */
 void freeTab2D(int** tab, int n);
-
-
 
 
 #endif

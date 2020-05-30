@@ -19,9 +19,15 @@
 int main(int argc, char const *argv[]) {
   int** tab;
   int n;
+  int i;
   n = 4;
   tab = creerTabEntier2D(n);
-  afficherTab(tab, n);
+  for (i=0; i<10; i++){
+    system("clear");
+    afficherTab(tab, n);
+    deplacer(tab, n);
+    ajoutTuile(tab, n);
+  }
   freeTab2D(tab, n);
   return 0;
 }

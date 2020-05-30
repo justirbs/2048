@@ -57,20 +57,32 @@ void afficherTab(int** tab, int n){
   int k; //iterrateur de boucle
   for(i=0; i<n; i++){
     for(k=0; k<n; k++){
-      printf("----");
+      printf("-------");
     }
     printf("-\n|");
     for(j=0; j<n; j++){
       if(tab[i][j] == 0){
-        printf("   |");
+        printf("      |");
       } else {
-        printf(" %d |", tab[i][j]);
+        if(tab[i][j] < 10){
+          printf("   %d  |", tab[i][j]);
+        } else {
+          if(tab[i][j] < 100){
+            printf("  %d  |", tab[i][j]);
+          } else {
+            if(tab[i][j] < 1000){
+              printf("  %d |", tab[i][j]);
+            } else {
+              printf(" %d |", tab[i][j]);
+            }
+          }
+        }
       }
     }
     printf("\n");
   }
   for(k=0; k<n; k++){
-    printf("----");
+    printf("-------");
   }
   printf("-\n");
 }
