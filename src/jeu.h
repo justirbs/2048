@@ -37,7 +37,7 @@ void ajoutTuile(int** tab, int n);
 /**
  * \fn void deplacer(int** tab, int n)
  *
- * \author Justine Ribas <ribasjusti@eisti.eu>
+ * \author Vincent Donney <donneyvinc@eisti.eu>
  * \version 0.1
  * \date 30 mai 2020
  *
@@ -117,6 +117,42 @@ void deplacerHaut(int** tab, int n);
  *
  */
 void deplacerBas(int** tab, int n);
+
+
+/**
+ * \fn int aGagne(int** tab, int n)
+ *
+ * \author Sacha Grumelart <grumelarts@eisti.eu>
+ * \version 0.1
+ * \date 31 mai 2020
+ *
+ * \brief permet de déterminer si l'utilisateur a gagné la partie
+ *
+ *
+ * \param tab le plateau de jeu
+ * \param n la taille du tableau
+ * \return 1 si le joueur a gagné, 0 sinon
+ *
+ */
+int aGagne(int** tab, int n);
+
+
+/**
+ * \fn int aPerdu(int** tab, int n)
+ *
+ * \author Sacha Grumelart <grumelarts@eisti.eu>
+ * \version 0.1
+ * \date 31 mai 2020
+ *
+ * \brief permet de déterminer si l'utilisateur a perdu la partie
+ *
+ *
+ * \param tab le plateau de jeu
+ * \param n la taille du tableau
+ * \return 1 si le joueur a perdu, 0 sinon
+ *
+ */
+int aPerdu(int** tab, int n);
 
 
 #endif

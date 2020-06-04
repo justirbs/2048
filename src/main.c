@@ -19,14 +19,20 @@
 int main(int argc, char const *argv[]) {
   int** tab;
   int n;
-  int i;
   n = 4;
   tab = creerTabEntier2D(n);
-  for (i=0; i<10; i++){
+  do{
     system("clear");
     afficherTab(tab, n);
     deplacer(tab, n);
     ajoutTuile(tab, n);
+  } while (!aGagne(tab, n)  &&  !aPerdu(tab, n));
+  if(aGagne(tab, n)){
+    printf("Vous avez gagné la partie !\n");
+  } else {
+    if(aPerdu(tab, n)){
+      printf("Vous avez perdu... Toutes les cases sont pleines\n");
+    }
   }
   freeTab2D(tab, n);
   return 0;

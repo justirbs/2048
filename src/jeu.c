@@ -166,3 +166,41 @@ void deplacerBas(int** tab, int n){
     }
   }
 }
+
+
+int aGagne(int** tab, int n){
+  int i;
+	int j;
+  int res;
+  res = 0;
+	for (i = 0; i < n; i++)
+	{
+		for (j = 0; j < n; j++)
+		{
+			if (tab[i][j] == 2048)
+			{
+				res = 1;
+			}
+		}
+	}
+  return(res);
+}
+
+
+int aPerdu(int** tab, int n){
+  int i;
+	int j;
+  int res;
+  res = 1;
+	for (i = 0; i < n; i++)
+	{
+		for (j = 0; j < n; j++)
+		{
+			if (tab[i][j] == 0)
+			{
+				res = 0;
+			}
+		}
+	}
+  return(res);
+}
