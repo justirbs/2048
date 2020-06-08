@@ -25,6 +25,7 @@ int main(int argc, char const *argv[]) {
   n = 0;
   //si il a un fichier de sauvegarde
   if(sauvegardeDispo()){
+    system("clear");
     printf("Voulez vous reprendre votre partie en cour ? (Saisir 'ok' pour oui et autre chose pour non)\n");
     scanf("%2s", rep);
     viderBuffer();
