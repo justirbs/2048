@@ -17,7 +17,7 @@
 //Code de la fonction
 
 int main(int argc, char const *argv[]) {
-  int** tab;
+  int** tab;//
   int n;
   n = 4;
   tab = creerTabEntier2D(n);
@@ -27,6 +27,7 @@ int main(int argc, char const *argv[]) {
     deplacer(tab, n);
     ajoutTuile(tab, n);
   } while (!aGagne(tab, n)  &&  !aPerdu(tab, n));
+  afficherTab(tab, n);
   if(aGagne(tab, n)){
     printf("Vous avez gagné la partie !\n");
   } else {
