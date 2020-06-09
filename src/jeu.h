@@ -35,7 +35,7 @@ void ajoutTuile(int** tab, int n);
 
 
 /**
- * \fn void deplacer(int** tab, int n)
+ * \fn int deplacer(int** tab, int n)
  *
  * \author Vincent Donney <donneyvinc@eisti.eu>
  * \version 0.1
@@ -48,11 +48,11 @@ void ajoutTuile(int** tab, int n);
  * \param n la taille du tableau
  *
  */
-void deplacer(int** tab, int n);
+int deplacer(int** tab, int n);
 
 
 /**
- * \fn void deplacerDroite(int** tab, int n)
+ * \fn int deplacerDroite(int** tab, int n)
  *
  * \author Justine Ribas <ribasjusti@eisti.eu>
  * \version 0.1
@@ -65,11 +65,11 @@ void deplacer(int** tab, int n);
  * \param n la taille du tableau
  *
  */
-void deplacerDroite(int** tab, int n);
+int deplacerDroite(int** tab, int n);
 
 
 /**
- * \fn void deplacerGauche(int** tab, int n)
+ * \fn int deplacerGauche(int** tab, int n)
  *
  * \author Justine Ribas <ribasjusti@eisti.eu>
  * \version 0.1
@@ -82,11 +82,11 @@ void deplacerDroite(int** tab, int n);
  * \param n la taille du tableau
  *
  */
-void deplacerGauche(int** tab, int n);
+int deplacerGauche(int** tab, int n);
 
 
 /**
- * \fn void deplacerHaut(int** tab, int n)
+ * \fn int deplacerHaut(int** tab, int n)
  *
  * \author Justine Ribas <ribasjusti@eisti.eu>
  * \version 0.1
@@ -99,11 +99,11 @@ void deplacerGauche(int** tab, int n);
  * \param n la taille du tableau
  *
  */
-void deplacerHaut(int** tab, int n);
+int deplacerHaut(int** tab, int n);
 
 
 /**
- * \fn void deplacerBas(int** tab, int n)
+ * \fn int deplacerBas(int** tab, int n)
  *
  * \author Justine Ribas <ribasjusti@eisti.eu>
  * \version 0.1
@@ -116,7 +116,7 @@ void deplacerHaut(int** tab, int n);
  * \param n la taille du tableau
  *
  */
-void deplacerBas(int** tab, int n);
+int deplacerBas(int** tab, int n);
 
 
 /**

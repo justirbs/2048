@@ -48,11 +48,12 @@ int main(int argc, char const *argv[]) {
       system("clear");
       afficherTab(tab, n);
       //faire jouer le joueur
-      deplacer(tab, n);
-      //faire apparaite la nouvelle tuile
-      ajoutTuile(tab, n);
-      //sauvegarder l'état actuel de la partie
-      sauvegarde(tab, n);
+      if(deplacer(tab, n)){
+        //faire apparaite la nouvelle tuile
+        ajoutTuile(tab, n);
+        //sauvegarder l'état actuel de la partie
+        sauvegarde(tab, n);
+      }
     } while (!aGagne(tab, n)  &&  !aPerdu(tab, n));
     remove(NOMFICHIER);
     if(aGagne(tab, n)){

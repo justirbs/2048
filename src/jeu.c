@@ -30,8 +30,10 @@ void ajoutTuile(int** tab, int n){
 }
 
 
-void deplacer(int** tab, int n){
+int deplacer(int** tab, int n){
   int key;
+  int valRetour;
+  valRetour = 0;
   printf("Pour déplacer les tuiles, appuyer sur les touches Z, Q, S, et D.\n");
   do{
     key = getkey();
@@ -41,29 +43,32 @@ void deplacer(int** tab, int n){
 
   switch(key){
     case 0x7A : // z
-      deplacerHaut(tab, n);
+      valRetour = deplacerHaut(tab, n);
       break;
     case 0x71 : // q
-      deplacerGauche(tab, n);
+      valRetour = deplacerGauche(tab, n);
       break;
     case 0x73 : // s
-      deplacerBas(tab, n);
+      valRetour = deplacerBas(tab, n);
       break;
     case 0x64 : // d
-      deplacerDroite(tab, n);
+      valRetour = deplacerDroite(tab, n);
       break;
     default :
       printf("erreur\n");
       break;
   }
+  return(valRetour);
 }
 
 
-void deplacerDroite(int** tab, int n){
+int deplacerDroite(int** tab, int n){
   int i;
   int j;
   int tmp;
   int aContinue;
+  int valRetour;
+  valRetour = 0;
   for(i=0; i<n; i++){
     aContinue = 1;
     while (aContinue){
@@ -74,24 +79,29 @@ void deplacerDroite(int** tab, int n){
           tmp = tab[i][j];
           tab[i][j] = tab[i][j+1];
           tab[i][j+1] = tmp;
+          valRetour = 1;
         } else {
           if(tab[i][j] == tab[i][j+1]  &&  tab[i][j] != 0){
             aContinue = 1;
             tab[i][j+1] = tab[i][j+1] + tab[i][j];
             tab[i][j] = 0;
+            valRetour = 1;
           }
         }
       }
     }
   }
+  return(valRetour);
 }
 
 
-void deplacerGauche(int** tab, int n){
+int deplacerGauche(int** tab, int n){
   int i;
   int j;
   int tmp;
   int aContinue;
+  int valRetour;
+  valRetour = 0;
   for(i=0; i<n; i++){
     aContinue = 1;
     while (aContinue){
@@ -102,24 +112,29 @@ void deplacerGauche(int** tab, int n){
           tmp = tab[i][j];
           tab[i][j] = tab[i][j-1];
           tab[i][j-1] = tmp;
+          valRetour = 1;
         } else {
           if(tab[i][j] == tab[i][j-1]  &&  tab[i][j] != 0){
             aContinue = 1;
             tab[i][j-1] = tab[i][j-1] + tab[i][j];
             tab[i][j] = 0;
+            valRetour = 1;
           }
         }
       }
     }
   }
+  return(valRetour);
 }
 
 
-void deplacerHaut(int** tab, int n){
+int deplacerHaut(int** tab, int n){
   int i;
   int j;
   int tmp;
   int aContinue;
+  int valRetour;
+  valRetour = 0;
   for(j=0; j<n; j++){
     aContinue = 1;
     while (aContinue){
@@ -130,24 +145,29 @@ void deplacerHaut(int** tab, int n){
           tmp = tab[i][j];
           tab[i][j] = tab[i-1][j];
           tab[i-1][j] = tmp;
+          valRetour = 1;
         } else {
           if(tab[i][j] == tab[i-1][j]  &&  tab[i][j] != 0){
             aContinue = 1;
             tab[i-1][j] = tab[i-1][j] + tab[i][j];
             tab[i][j] = 0;
+            valRetour = 1;
           }
         }
       }
     }
   }
+  return(valRetour);
 }
 
 
-void deplacerBas(int** tab, int n){
+int deplacerBas(int** tab, int n){
   int i;
   int j;
   int tmp;
   int aContinue;
+  int valRetour;
+  valRetour = 0;
   for(j=0; j<n; j++){
     aContinue = 1;
     while (aContinue){
@@ -158,16 +178,19 @@ void deplacerBas(int** tab, int n){
           tmp = tab[i][j];
           tab[i][j] = tab[i+1][j];
           tab[i+1][j] = tmp;
+          valRetour = 1;
         } else {
           if(tab[i][j] == tab[i+1][j]  &&  tab[i][j] != 0){
             aContinue = 1;
             tab[i+1][j] = tab[i+1][j] + tab[i][j];
             tab[i][j] = 0;
+            valRetour = 1;
           }
         }
       }
     }
   }
+  return(valRetour);
 }
 
 
