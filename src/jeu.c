@@ -31,23 +31,26 @@ void ajoutTuile(int** tab, int n){
 
 
 void deplacer(int** tab, int n){
-  int direction;
-  printf("Pour déplacer les tuiles, saisissez :\n1-Gauche\n3-Droite\n5-Haut\n2-Bas\n");
+  int key;
+  printf("Pour déplacer les tuiles, appuyer sur les touches Z, Q, S, et D.\n");
   do{
-    direction = saisirEntier();
-  } while (direction != 1  &&  direction != 2  &&  direction != 3  &&  direction != 5);
-  switch(direction){
-    case 1 :
-      deplacerGauche(tab, n);
-      break;
-    case 3 :
-      deplacerDroite(tab, n);
-      break;
-    case 5 :
+    key = getkey();
+  }
+  //tant que le joueur n'apuie pas sur Z, Q, S, D
+  while(key != 0x7A && key != 0x71 && key != 0x73 && key != 0x64);
+
+  switch(key){
+    case 0x7A : // z
       deplacerHaut(tab, n);
       break;
-    case 2 :
+    case 0x71 : // q
+      deplacerGauche(tab, n);
+      break;
+    case 0x73 : // s
       deplacerBas(tab, n);
+      break;
+    case 0x64 : // d
+      deplacerDroite(tab, n);
       break;
     default :
       printf("erreur\n");

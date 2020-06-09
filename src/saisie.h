@@ -44,4 +44,19 @@ int saisirEntier(void);
  */
 void viderBuffer(void);
 
+/**
+ *\fn int getkey()
+ *
+ *\author Justine Ribas <ribasjusti@eisti.eu>
+ *\version 0.1
+ *\date 08 juin 2020
+ *
+ *\brief récupère la touche qui a été appuyé
+ *
+ *
+ *\return le code de la touche appuyé
+ *
+ */
+int getkey();
+
 #endif

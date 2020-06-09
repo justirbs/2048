@@ -19,17 +19,20 @@
 //Code de la fonction
 
 int main(int argc, char const *argv[]) {
-  int** tab;//
+  int** tab;
   int n;
-  char rep[2]; //la réponse de l'utilisateur
+  int key;
   n = 0;
+  key=0;
   //si il a un fichier de sauvegarde
   if(sauvegardeDispo()){
     system("clear");
-    printf("Voulez vous reprendre votre partie en cour ? (Saisir 'ok' pour oui et autre chose pour non)\n");
-    scanf("%2s", rep);
-    viderBuffer();
-    if(!strcmp(rep,"ok")){
+    printf("Voulez vous reprendre votre partie en cour ? (Appuyer sur la touche 'R' pour reprendre et 'I' pour ignorer)\n");
+    while(key != 0x72 && key != 0x69){
+      key = getkey();
+    }
+
+    if(key == 0x72){
       tab = restauration(&n);
     } else {
       n = 4;
