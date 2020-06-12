@@ -15,6 +15,38 @@
 
 // Inclusion des librairies
 #include "tableau.h"
+#include "sauvegarde.h"
+#include <string.h>
+
+
+/**
+ * \fn void menu(void)
+ *
+ * \author Grumelart Sacha <grumelarts@eisti.eu>
+ * \version 0.1
+ * \date 10 juin 2020
+ *
+ * \brief procédure d'affichage du menu du jeu
+ *
+ *
+ */
+void menu(void);
+
+
+
+/**
+ * \fn void jouePartie(void)
+ *
+ * \author Justine Ribas <ribasjusti@eisti.eu>
+ * \version 0.1
+ * \date 12 juin 2020
+ *
+ * \brief permet de lancer une partie
+ *
+ *
+ */
+void jouePartie(void);
+
 
 /**
  * \fn void ajoutTuile(int** tab, int n)

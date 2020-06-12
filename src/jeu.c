@@ -16,6 +16,89 @@
 
 // Codes des fonctions
 
+void menu(void){
+  int choix;
+  int key;
+  key = -1;
+  system("clear");
+  printf("---Menu---\n\n ._________________.\n |                 |\n |  ~JEU DU 2048~  |\n |                 |\n ._________________.\n\n\n  Bienvenue sur 2048!  \n\n1. Règles du jeu\n2. Jouons !\n3. Quitter\n\nVotre choix?\n\n");
+  do{
+    choix = saisirEntier();
+  } while (choix != 1  &&  choix != 2 && choix != 3);
+  switch(choix)
+  {
+    case 1 :
+      system("clear");
+      printf("Voici les règles du jeu : \n\nLe but est d'atteindre une tuile de valeur 2048. \n" "Pour cela, il faut assembler les tuiles de même valeur en les faisant glisser à droit, à gauche, en bas ou à droite \n\n\nAppuyer sur la touche espace pour quitter\n");
+      while (key != 0x20){
+        key = getkey();
+      }
+      menu();
+      break;
+    case 2 :
+      jouePartie();
+      break;
+    case 3 :
+    exit(EXIT_FAILURE);
+      break;
+    default:
+      printf("Erreur\n");
+      break;
+  }
+}
+
+
+void jouePartie(void){
+  int** tab;
+  int n;
+  int key;
+  n = 0;
+  key=0;
+  //si il a un fichier de sauvegarde
+  if(sauvegardeDispo()){
+    system("clear");
+    printf("Voulez vous reprendre votre partie en cours ? (Appuyer sur la touche 'R' pour reprendre et 'I' pour ignorer)\n");
+    while(key != 0x72 && key != 0x69){
+      key = getkey();
+    }
+    if(key == 0x72){
+      tab = restauration(&n);
+    } else {
+      n = 4;
+      tab = creerTabEntier2D(n);
+    }
+  }
+  else{
+    n = 4;
+    tab = creerTabEntier2D(n);
+  }
+  if(n>0){
+    do{
+      system("clear");
+      afficherTab(tab, n);
+      //faire jouer le joueur
+      if(deplacer(tab, n)){
+        //faire apparaite la nouvelle tuile
+        ajoutTuile(tab, n);
+        //sauvegarder l'état actuel de la partie
+        sauvegarde(tab, n);
+      }
+    } while (!aGagne(tab, n)  &&  !aPerdu(tab, n));
+    remove(NOMFICHIER);
+    system("clear");
+    afficherTab(tab, n);
+    if(aGagne(tab, n)){
+      printf("Vous avez gagné la partie !\n");
+    } else {
+      if(aPerdu(tab, n)){
+        printf("Vous avez perdu... Toutes les cases sont pleines\n");
+      }
+    }
+    freeTab2D(tab, n);
+  }
+}
+
+
 void ajoutTuile(int** tab, int n){
   int ligne;
   int colonne;
