@@ -148,30 +148,38 @@ int deplacer(int** tab, int n){
 int deplacerDroite(int** tab, int n){
   int i;
   int j;
+  int k;
   int tmp;
-  int aContinue;
+  int deb;
   int valRetour;
+  int aFusionne;
   valRetour = 0;
+  aFusionne = 0;
   for(i=0; i<n; i++){
-    aContinue = 1;
-    while (aContinue){
-      aContinue = 0;
-      for(j=n-2; j>=0; j--){
-        if(tab[i][j] != 0  &&  tab[i][j+1] == 0){
-          aContinue = 1;
-          tmp = tab[i][j];
-          tab[i][j] = tab[i][j+1];
-          tab[i][j+1] = tmp;
+    deb = n-1;
+    for(j=deb-1; j>=0; j--){
+      if(tab[i][j] != 0){
+        k=j;
+        while(k<deb && tab[i][k+1] == 0){
+          k++;
+        }
+        if(k != deb && tab[i][j] == tab[i][k+1]){
+          tab[i][k+1] = tab[i][k+1] + tab[i][j];
+          tab[i][j] = 0;
+          aFusionne = 1;
           valRetour = 1;
-        } else {
-          if(tab[i][j] == tab[i][j+1]  &&  tab[i][j] != 0){
-            aContinue = 1;
-            tab[i][j+1] = tab[i][j+1] + tab[i][j];
-            tab[i][j] = 0;
+        }
+        else{
+          if(k!=j){
+            tmp = tab[i][j];
+            tab[i][j] = tab[i][k];
+            tab[i][k] = tmp;
             valRetour = 1;
           }
         }
       }
+      if(aFusionne)deb = k;
+      aFusionne = 0;
     }
   }
   return(valRetour);
@@ -181,30 +189,38 @@ int deplacerDroite(int** tab, int n){
 int deplacerGauche(int** tab, int n){
   int i;
   int j;
+  int k;
   int tmp;
-  int aContinue;
+  int deb;
   int valRetour;
+  int aFusionne;
   valRetour = 0;
+  aFusionne = 0;
   for(i=0; i<n; i++){
-    aContinue = 1;
-    while (aContinue){
-      aContinue = 0;
-      for(j=1; j<n; j++){
-        if(tab[i][j] != 0  &&  tab[i][j-1] == 0){
-          aContinue = 1;
-          tmp = tab[i][j];
-          tab[i][j] = tab[i][j-1];
-          tab[i][j-1] = tmp;
-          valRetour = 1;
-        } else {
-          if(tab[i][j] == tab[i][j-1]  &&  tab[i][j] != 0){
-            aContinue = 1;
-            tab[i][j-1] = tab[i][j-1] + tab[i][j];
+    deb = 0;
+    for(j=deb+1; j<n; j++){
+      if(tab[i][j] != 0){
+        k=j;
+        while(k>deb && tab[i][k-1] == 0){
+          k--;
+        }
+          if(k != deb && tab[i][j] == tab[i][k-1]){
+            tab[i][k-1] = tab[i][k-1] + tab[i][j];
             tab[i][j] = 0;
+            aFusionne = 1;
             valRetour = 1;
           }
-        }
+          else{
+            if(k!=j){
+              tmp = tab[i][j];
+              tab[i][j] = tab[i][k];
+              tab[i][k] = tmp;
+              valRetour = 1;
+            }
+          }
       }
+      if(aFusionne)deb = k;
+      aFusionne = 0;
     }
   }
   return(valRetour);
@@ -214,30 +230,38 @@ int deplacerGauche(int** tab, int n){
 int deplacerHaut(int** tab, int n){
   int i;
   int j;
+  int k;
   int tmp;
-  int aContinue;
+  int deb;
   int valRetour;
+  int aFusionne;
   valRetour = 0;
+  aFusionne = 0;
   for(j=0; j<n; j++){
-    aContinue = 1;
-    while (aContinue){
-      aContinue = 0;
-      for(i=1; i<n; i++){
-        if(tab[i][j] != 0  &&  tab[i-1][j] == 0){
-          aContinue = 1;
-          tmp = tab[i][j];
-          tab[i][j] = tab[i-1][j];
-          tab[i-1][j] = tmp;
-          valRetour = 1;
-        } else {
-          if(tab[i][j] == tab[i-1][j]  &&  tab[i][j] != 0){
-            aContinue = 1;
-            tab[i-1][j] = tab[i-1][j] + tab[i][j];
+    deb = 0;
+    for(i=deb+1; i<n; i++){
+      if(tab[i][j] != 0){
+        k=i;
+        while(k>deb && tab[k-1][j] == 0){
+          k--;
+        }
+          if(k != deb && tab[i][j] == tab[k-1][j]){
+            tab[k-1][j] = tab[k-1][j] + tab[i][j];
             tab[i][j] = 0;
+            aFusionne = 1;
             valRetour = 1;
           }
-        }
+          else{
+            if(k!=i){
+              tmp = tab[i][j];
+              tab[i][j] = tab[k][j];
+              tab[k][j] = tmp;
+              valRetour = 1;
+            }
+          }
       }
+      if(aFusionne)deb = k;
+      aFusionne = 0;
     }
   }
   return(valRetour);
@@ -247,30 +271,38 @@ int deplacerHaut(int** tab, int n){
 int deplacerBas(int** tab, int n){
   int i;
   int j;
+  int k;
   int tmp;
-  int aContinue;
+  int deb;
   int valRetour;
+  int aFusionne;
   valRetour = 0;
+  aFusionne = 0;
   for(j=0; j<n; j++){
-    aContinue = 1;
-    while (aContinue){
-      aContinue = 0;
-      for(i=n-2; i>=0; i--){
-        if(tab[i][j] != 0  &&  tab[i+1][j] == 0){
-          aContinue = 1;
-          tmp = tab[i][j];
-          tab[i][j] = tab[i+1][j];
-          tab[i+1][j] = tmp;
+    deb = n-1;
+    for(i=deb-1; i>=0; i--){
+      if(tab[i][j] != 0){
+        k=i;
+        while(k<deb && tab[k+1][j] == 0){
+          k++;
+        }
+        if(k != deb && tab[i][j] == tab[k+1][j]){
+          tab[k+1][j] = tab[k+1][j] + tab[i][j];
+          tab[i][j] = 0;
+          aFusionne = 1;
           valRetour = 1;
-        } else {
-          if(tab[i][j] == tab[i+1][j]  &&  tab[i][j] != 0){
-            aContinue = 1;
-            tab[i+1][j] = tab[i+1][j] + tab[i][j];
-            tab[i][j] = 0;
+        }
+        else{
+          if(k!=i){
+            tmp = tab[i][j];
+            tab[i][j] = tab[k][j];
+            tab[k][j] = tmp;
             valRetour = 1;
           }
         }
       }
+      if(aFusionne)deb = k;
+      aFusionne = 0;
     }
   }
   return(valRetour);
