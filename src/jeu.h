@@ -47,6 +47,39 @@ void menu(void);
  */
 void jouePartie(void);
 
+/**
+ * \fn int choixTaille(void)
+ *
+ * \author Justine Ribas <ribasjusti@eisti.eu>
+ * \version 0.1
+ * \date 12 juin 2020
+ *
+ * \brief permet de choisir la taille du plateau
+ *
+ *
+ * \return la taille du plateau
+ *
+ */
+int choixTaille(void);
+
+
+/**
+ * \fn void afficheScore(int** tab, int n)
+ *
+ * \author Sacha Grumelart <grumelarts@eisti.eu>
+ * \version 0.1
+ * \date 12 juin 2020
+ *
+ * \brief permet d'afficher si le joueur a perdu ou gagné
+ *
+ *
+ * \param tab le tableau à modifier
+ * \param n la taille du tableau
+ *
+ */
+void afficheScore(int** tab, int n);
+
+
 
 /**
  * \fn void ajoutTuile(int** tab, int n)
@@ -60,7 +93,6 @@ void jouePartie(void);
  *
  * \param tab le tableau à modifier
  * \param n la taille du tableau
- * \return le tableau agrandi
  *
  */
 void ajoutTuile(int** tab, int n);
@@ -78,6 +110,7 @@ void ajoutTuile(int** tab, int n);
  *
  * \param tab le tableau à modifier
  * \param n la taille du tableau
+ * \return 1 si un déplacement a été effectué, 0 sinon
  *
  */
 int deplacer(int** tab, int n);
@@ -95,6 +128,7 @@ int deplacer(int** tab, int n);
  *
  * \param tab le tableau à modifier
  * \param n la taille du tableau
+ * \return 1 si un déplacement a été effectué, 0 sinon
  *
  */
 int deplacerDroite(int** tab, int n);
@@ -112,6 +146,7 @@ int deplacerDroite(int** tab, int n);
  *
  * \param tab le tableau à modifier
  * \param n la taille du tableau
+ * \return 1 si un déplacement a été effectué, 0 sinon
  *
  */
 int deplacerGauche(int** tab, int n);
@@ -120,7 +155,7 @@ int deplacerGauche(int** tab, int n);
 /**
  * \fn int deplacerHaut(int** tab, int n)
  *
- * \author Justine Ribas <ribasjusti@eisti.eu>
+ * \author Vincent Donney <donneyvinc@eisti.eu>
  * \version 0.1
  * \date 30 mai 2020
  *
@@ -129,6 +164,7 @@ int deplacerGauche(int** tab, int n);
  *
  * \param tab le tableau à modifier
  * \param n la taille du tableau
+ * \return 1 si un déplacement a été effectué, 0 sinon
  *
  */
 int deplacerHaut(int** tab, int n);
@@ -137,7 +173,7 @@ int deplacerHaut(int** tab, int n);
 /**
  * \fn int deplacerBas(int** tab, int n)
  *
- * \author Justine Ribas <ribasjusti@eisti.eu>
+ * \author Vincent Donney <donneyvinc@eisti.eu>
  * \version 0.1
  * \date 30 mai 2020
  *
@@ -146,6 +182,7 @@ int deplacerHaut(int** tab, int n);
  *
  * \param tab le tableau à modifier
  * \param n la taille du tableau
+ * \return 1 si un déplacement a été effectué, 0 sinon
  *
  */
 int deplacerBas(int** tab, int n);

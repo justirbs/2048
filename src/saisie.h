@@ -45,7 +45,7 @@ int saisirEntier(void);
 void viderBuffer(void);
 
 /**
- *\fn int getkey()
+ *\fn int getkey(void)
  *
  *\author Justine Ribas <ribasjusti@eisti.eu>
  *\version 0.1
@@ -57,6 +57,6 @@ void viderBuffer(void);
  *\return le code de la touche appuyé
  *
  */
-int getkey();
+int getkey(void);
 
 #endif

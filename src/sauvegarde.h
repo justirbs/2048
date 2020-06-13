@@ -22,7 +22,7 @@
 /**
  * \fn void sauvegarde(int** plateau, int taille)
  *
- * \author Ilias Bougrhous
+ * \author Ilias Bougrhous <bougrhousi@eisti.eu>
  * \version 0.1
  * \date 08 juin 2020
  *
@@ -38,7 +38,7 @@ void sauvegarde(int** plateau, int taille);
 /**
  * \fn int** restauration(int* taille)
  *
- * \author Ilias Bougrhous
+ * \author Ilias Bougrhous <bougrhousi@eisti.eu>
  * \version 0.1
  * \date 08 juin 2020
  *
@@ -46,16 +46,15 @@ void sauvegarde(int** plateau, int taille);
  *
  *
  * \param taille la taille du plateau
- *
  * \return le plateau restauré
  *
  */
 int** restauration(int* taille);
 
 /**
- * \fn int sauvegardeDispo()
+ * \fn int sauvegardeDispo(void)
  *
- * \author Justine Ribas
+ * \author Ilias Bougrhous <bougrhousi@eisti.eu>
  * \version 0.1
  * \date 08 juin 2020
  *
@@ -65,6 +64,6 @@ int** restauration(int* taille);
  * \return le plateau restauré
  *
  */
-int sauvegardeDispo();
+int sauvegardeDispo(void);
 
 #endif

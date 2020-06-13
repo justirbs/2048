@@ -17,28 +17,29 @@
 // Codes des fonctions
 
 void menu(void){
-  int choix;
-  int key;
-  key = -1;
+  int choix; //le choix de l'utilisateur
+  int key; //la touche du clavier sur laquelle l'utilisateur va taper
+  key = 0;
   system("clear");
   printf("---Menu---\n\n ._________________.\n |                 |\n |  ~JEU DU 2048~  |\n |                 |\n ._________________.\n\n\n  Bienvenue sur 2048!  \n\n1. Règles du jeu\n2. Jouons !\n3. Quitter\n\nVotre choix?\n\n");
+  //l'utilisateur fait un choix parmi les options proposées
   do{
     choix = saisirEntier();
   } while (choix != 1  &&  choix != 2 && choix != 3);
   switch(choix)
   {
-    case 1 :
+    case 1 : //On affiche les règles du jeu
       system("clear");
-      printf("Voici les règles du jeu : \n\nLe but est d'atteindre une tuile de valeur 2048. \n" "Pour cela, il faut assembler les tuiles de même valeur en les faisant glisser à droit, à gauche, en bas ou à droite \n\n\nAppuyer sur la touche espace pour quitter\n");
+      printf("Voici les règles du jeu : \n\nLe but du jeu est de fusionner les nombres ensemble (puissances de 2) et d’atteindre le nombre 2048.\nUne grille est constitué de 4 lignes et 4 colonnes.\nChaque cellule peut être vide ou contenir un nombre.\nA l’état initial la grille possède simplement deux carrés initialisés. \nSuivant les déplacements souhaités de l’utilisateur, les tuiles vont s’additionner ou se déplacer.\nA chaque déplacement, une tuile apparaît de manière aléatoire sur le plateau.\n\n\nAppuyez sur la touche espace pour quitter\n");
       while (key != 0x20){
         key = getkey();
       }
       menu();
       break;
-    case 2 :
+    case 2 : //On lance une partie
       jouePartie();
       break;
-    case 3 :
+    case 3 : //On quitte le programme
     exit(EXIT_FAILURE);
       break;
     default:
@@ -49,12 +50,12 @@ void menu(void){
 
 
 void jouePartie(void){
-  int** tab;
-  int n;
-  int key;
+  int** tab; //le plateau de jeu
+  int n; //la taille du plateau
+  int key; //la touche sur laquelle tape l'utilisateur
   n = 0;
-  key=0;
-  //si il a un fichier de sauvegarde
+  key = 0;
+  //Dans le cas où il y a un fichier de sauvegarde
   if(sauvegardeDispo()){
     system("clear");
     printf("Voulez vous reprendre votre partie en cours ? (Appuyer sur la touche 'R' pour reprendre et 'I' pour ignorer)\n");
@@ -62,14 +63,18 @@ void jouePartie(void){
       key = getkey();
     }
     if(key == 0x72){
+      //on restaure la sauvegarde de la partie prédédente
       tab = restauration(&n);
     } else {
-      n = 4;
+      //on commence une nouvelle partie
+      n = choixTaille();
       tab = creerTabEntier2D(n);
     }
   }
   else{
-    n = 4;
+    //s'il n'y a pas de sauvegarde, on commence une nouvelle partie
+    system("clear");
+    n = choixTaille();
     tab = creerTabEntier2D(n);
   }
   if(n>0){
@@ -85,16 +90,31 @@ void jouePartie(void){
       }
     } while (!aGagne(tab, n)  &&  !aPerdu(tab, n));
     remove(NOMFICHIER);
-    system("clear");
-    afficherTab(tab, n);
-    if(aGagne(tab, n)){
-      printf("Vous avez gagné la partie !\n");
-    } else {
-      if(aPerdu(tab, n)){
-        printf("Vous avez perdu... Toutes les cases sont pleines\n");
-      }
-    }
+    afficheScore(tab, n);
     freeTab2D(tab, n);
+  }
+}
+
+
+int choixTaille(void){
+  int n; //la taille choisie par l'utilisateur
+  printf("Quelle taille de plateau voulez vous ?\n(le minimum jouable est 4)\n");
+  do {
+    n = saisirEntier();
+  } while(n < 4);
+  return (n);
+}
+
+
+void afficheScore(int** tab, int n){
+  system("clear");
+  afficherTab(tab, n);
+  if(aGagne(tab, n)){
+    printf("Vous avez gagné la partie! Bravo!\n");
+  } else {
+    if(aPerdu(tab, n)){
+      printf("Vous avez perdu... Vous n'avez plus de déplacements possibles\n");
+    }
   }
 }
 
@@ -104,18 +124,22 @@ void ajoutTuile(int** tab, int n){
   int colonne;
   srand(time(NULL)); //on initialise la fonction rand
   do{
+    //on prend une valeur entière aléatoire entre 0 et n-1
     ligne = (rand()%n);
     colonne = (rand()%n);
+    //il faut que la case correspondante soit vide
   }while (tab[ligne][colonne] != 0);
   do{
+    //on prend une valeur entière aléatoire entre 0 et 4
     tab[ligne][colonne] = (rand()%5);
+    //il faut que la valeur de la tuile soit 2 ou 4
   }while (tab[ligne][colonne] != 2  &&  tab[ligne][colonne] != 4);
 }
 
 
 int deplacer(int** tab, int n){
-  int key;
-  int valRetour;
+  int key; //la touche du clavier sur laquelle l'utilisateur va taper
+  int valRetour; //la valeur de retour qui indique si un déplacement a été effectué ou non
   valRetour = 0;
   printf("Pour déplacer les tuiles, appuyer sur les touches Z, Q, S, et D.\n");
   do{
@@ -123,18 +147,17 @@ int deplacer(int** tab, int n){
   }
   //tant que le joueur n'apuie pas sur Z, Q, S, D
   while(key != 0x7A && key != 0x71 && key != 0x73 && key != 0x64);
-
   switch(key){
-    case 0x7A : // z
+    case 0x7A : // si l'utilisateurà saisi Z (haut)
       valRetour = deplacerHaut(tab, n);
       break;
-    case 0x71 : // q
+    case 0x71 : // si l'utilisateurà saisi Q (gauche)
       valRetour = deplacerGauche(tab, n);
       break;
-    case 0x73 : // s
+    case 0x73 : // si l'utilisateurà saisi S (bas)
       valRetour = deplacerBas(tab, n);
       break;
-    case 0x64 : // d
+    case 0x64 : // si l'utilisateurà saisi D (droite)
       valRetour = deplacerDroite(tab, n);
       break;
     default :
@@ -148,11 +171,11 @@ int deplacer(int** tab, int n){
 int deplacerDroite(int** tab, int n){
   int i;
   int j;
-  int k;
-  int tmp;
-  int deb;
-  int valRetour;
-  int aFusionne;
+  int k; //variable de parcours des cases vides
+  int tmp; //variable temporaire pour échanger deux cases
+  int deb; //début du parcours des cases
+  int valRetour; //la valeur de retour qui indique si un déplacement a été effectué ou non
+  int aFusionne; //variable qui induque si une fusion entre deux tuile a été effectuée
   valRetour = 0;
   aFusionne = 0;
   for(i=0; i<n; i++){
@@ -189,11 +212,11 @@ int deplacerDroite(int** tab, int n){
 int deplacerGauche(int** tab, int n){
   int i;
   int j;
-  int k;
-  int tmp;
-  int deb;
-  int valRetour;
-  int aFusionne;
+  int k; //variable de parcours des cases vides
+  int tmp; //variable temporaire pour échanger deux cases
+  int deb; //début du parcours des cases
+  int valRetour; //la valeur de retour qui indique si un déplacement a été effectué ou non
+  int aFusionne; //variable qui induque si une fusion entre deux tuile a été effectuée
   valRetour = 0;
   aFusionne = 0;
   for(i=0; i<n; i++){
@@ -230,11 +253,11 @@ int deplacerGauche(int** tab, int n){
 int deplacerHaut(int** tab, int n){
   int i;
   int j;
-  int k;
-  int tmp;
-  int deb;
-  int valRetour;
-  int aFusionne;
+  int k; //variable de parcours des cases vides
+  int tmp; //variable temporaire pour échanger deux cases
+  int deb; //début du parcours des cases
+  int valRetour; //la valeur de retour qui indique si un déplacement a été effectué ou non
+  int aFusionne; //variable qui induque si une fusion entre deux tuile a été effectuée
   valRetour = 0;
   aFusionne = 0;
   for(j=0; j<n; j++){
@@ -271,11 +294,11 @@ int deplacerHaut(int** tab, int n){
 int deplacerBas(int** tab, int n){
   int i;
   int j;
-  int k;
-  int tmp;
-  int deb;
-  int valRetour;
-  int aFusionne;
+  int k; //variable de parcours des cases vides
+  int tmp; //variable temporaire pour échanger deux cases
+  int deb; //début du parcours des cases
+  int valRetour; //la valeur de retour qui indique si un déplacement a été effectué ou non
+  int aFusionne; //variable qui induque si une fusion entre deux tuile a été effectuée
   valRetour = 0;
   aFusionne = 0;
   for(j=0; j<n; j++){
@@ -343,5 +366,8 @@ int aPerdu(int** tab, int n){
 			}
 		}
 	}
+  if (res == 1 && (deplacerBas(tab, n) || deplacerHaut(tab, n) || deplacerDroite(tab, n) || deplacerGauche(tab, n))){
+    res = 0;
+  }
   return(res);
 }
