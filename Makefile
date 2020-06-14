@@ -24,8 +24,9 @@ $(PROG) : $(OBJ) #Compilation du programme
 .PHONY : doc #Regle de contournement de fichier appele doc
 
 clean : #Suppression des objets et le la documentation
-	$(RM) $(OBJ)
+	$(RM) $(OBJ) sauvegarde.txt
 	$(shell rm -rf doc/html doc/latex)
+
 
 doc : #Generation de la documentation Doxygen
 	$(shell doxygen Doxyfile)

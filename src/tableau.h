@@ -71,4 +71,21 @@ void afficherTab(int** tab, int n);
 void freeTab2D(int** tab, int n);
 
 
+/**
+ * \fn int** copieTab2D(int** tab1, int n)
+ *
+ * \author Justine Ribas <ribasjusti@eisti.eu>
+ * \version 0.1
+ * \date 14 juin 2020
+ *
+ * \brief permet de copier un tableau
+ *
+ *
+ * \param tab1 le tableau à copier
+ * \param n la taille du tableau
+ *
+ */
+int** copieTab2D(int** tab, int n);
+
+
 #endif

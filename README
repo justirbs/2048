@@ -15,4 +15,29 @@ Documentation :
   La documentation sera ainsi générée dans le dossier /doc et est accessible à partir du fichier /doc/html/index.html
 
 Nettoyage du projet :
-  Pour effacer la documentation générée et les fichiers objets il faut exécuter la commande "make clean" à la racine du projet
+  Pour effacer la documentation générée, les fichiers objets et la dernière sauvegarde il faut exécuter la commande "make clean" à la racine du projet
+
+Jeux test :
+  Pour faciliter la correction, nous avons prévu des sets de jeux test.
+  Pour cela, il vous suffit de copier puis de coller les deux lignes dans le fichier "sauvegarde.txt".
+  Si vous n'avez pas de partie en cours, le fichier n'existe pas, c'est donc à vous de le créer.
+  Une fois que vous avez bien copier les informations, il vous suffit de lancer le programme et de reprendre la partie en cours.
+
+  pour tester la fonction "aGagne" :
+  4
+  1024 1024 2 4 0 16 16 0 4 64 8 4 128 2 4 0
+  Copiez ces deux lignes dans "sauvegarde.txt" puis reprenez la partie.
+  Faites un déplacement horizontal (Q ou D) et vous aurez gagné.
+
+  pour tester la fonction "aPerdu" :
+  4
+  8 4 1024 16 32 256 256 128 8 4 8 256 1024 256 64 512
+  Copiez ces deux lignes dans "sauvegarde.txt" puis reprenez la partie.
+  Faites un déplacement horizontal (Q ou D) et vous aurez perdu.
+
+  pour tester le respect des règles de fusion :
+  4
+  4 4 8 2 0 16 16 0 4 4 4 4 32 32 32 0
+  Copiez ces deux lignes dans "sauvegarde.txt" puis reprenez la partie.
+  Faites un déplacement horizontal (Q ou D)
+  Vous pourrez observer que les cases fusionnent bien 2 à 2.

@@ -32,10 +32,12 @@ int** creerTabEntier2D(int n)
     fprintf(stderr, "problème d'alloc\n");
     exit(1);
     }
+    // toutes les tuiles sont vides
     for(j=0; j<n; j++){
       tab[i][j] = 0;
     }
   }
+  // deux tuile sont initialement placé de façon aléatoire sur le plateau
   ajoutTuile(tab, n);
   ajoutTuile(tab, n);
   return(tab);
@@ -85,4 +87,17 @@ void afficherTab(int** tab, int n){
     printf("-------");
   }
   printf("-\n");
+}
+
+int** copieTab2D(int** tab1, int n){
+  int i;
+  int j;
+  int** tab2; //la copie
+  tab2 = creerTabEntier2D(n);
+  for(i=0; i<n; i++){
+    for(j=0; j<n; j++){
+      tab2[i][j] = tab1[i][j];
+    }
+  }
+  return(tab2);
 }

@@ -119,7 +119,7 @@ int deplacer(int** tab, int n);
 /**
  * \fn int deplacerDroite(int** tab, int n)
  *
- * \author Justine Ribas <ribasjusti@eisti.eu>
+ * \author Vincent Donney <donneyvinc@eisti.eu>
  * \version 0.1
  * \date 30 mai 2020
  *
@@ -137,7 +137,7 @@ int deplacerDroite(int** tab, int n);
 /**
  * \fn int deplacerGauche(int** tab, int n)
  *
- * \author Justine Ribas <ribasjusti@eisti.eu>
+ * \author Vincent Donney <donneyvinc@eisti.eu>
  * \version 0.1
  * \date 30 mai 2020
  *

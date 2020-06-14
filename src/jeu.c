@@ -183,15 +183,18 @@ int deplacerDroite(int** tab, int n){
     for(j=deb-1; j>=0; j--){
       if(tab[i][j] != 0){
         k=j;
+        //On cherche la case vide la plus à droite
         while(k<deb && tab[i][k+1] == 0){
           k++;
         }
+        //si la case suivante est égale à la tuile qu'on veut déplacer, on les fusionne
         if(k != deb && tab[i][j] == tab[i][k+1]){
           tab[i][k+1] = tab[i][k+1] + tab[i][j];
           tab[i][j] = 0;
           aFusionne = 1;
           valRetour = 1;
         }
+        //sinon on pousse la tuile
         else{
           if(k!=j){
             tmp = tab[i][j];
@@ -224,23 +227,26 @@ int deplacerGauche(int** tab, int n){
     for(j=deb+1; j<n; j++){
       if(tab[i][j] != 0){
         k=j;
+        //On cherche la case vide la plus à gauche
         while(k>deb && tab[i][k-1] == 0){
           k--;
         }
-          if(k != deb && tab[i][j] == tab[i][k-1]){
-            tab[i][k-1] = tab[i][k-1] + tab[i][j];
-            tab[i][j] = 0;
-            aFusionne = 1;
+        //si la case suivante est égale à la tuile qu'on veut déplacer, on les fusionne
+        if(k != deb && tab[i][j] == tab[i][k-1]){
+          tab[i][k-1] = tab[i][k-1] + tab[i][j];
+          tab[i][j] = 0;
+          aFusionne = 1;
+          valRetour = 1;
+        }
+        //sinon on pousse la tuile
+        else{
+          if(k!=j){
+            tmp = tab[i][j];
+            tab[i][j] = tab[i][k];
+            tab[i][k] = tmp;
             valRetour = 1;
           }
-          else{
-            if(k!=j){
-              tmp = tab[i][j];
-              tab[i][j] = tab[i][k];
-              tab[i][k] = tmp;
-              valRetour = 1;
-            }
-          }
+        }
       }
       if(aFusionne)deb = k;
       aFusionne = 0;
@@ -265,23 +271,26 @@ int deplacerHaut(int** tab, int n){
     for(i=deb+1; i<n; i++){
       if(tab[i][j] != 0){
         k=i;
+        //On cherche la case vide la plus en haut
         while(k>deb && tab[k-1][j] == 0){
           k--;
         }
-          if(k != deb && tab[i][j] == tab[k-1][j]){
-            tab[k-1][j] = tab[k-1][j] + tab[i][j];
-            tab[i][j] = 0;
-            aFusionne = 1;
+        //si la case suivante est égale à la tuile qu'on veut déplacer, on les fusionne
+        if(k != deb && tab[i][j] == tab[k-1][j]){
+          tab[k-1][j] = tab[k-1][j] + tab[i][j];
+          tab[i][j] = 0;
+          aFusionne = 1;
+          valRetour = 1;
+        }
+        //sinon on pousse la tuile
+        else{
+          if(k!=i){
+            tmp = tab[i][j];
+            tab[i][j] = tab[k][j];
+            tab[k][j] = tmp;
             valRetour = 1;
           }
-          else{
-            if(k!=i){
-              tmp = tab[i][j];
-              tab[i][j] = tab[k][j];
-              tab[k][j] = tmp;
-              valRetour = 1;
-            }
-          }
+        }
       }
       if(aFusionne)deb = k;
       aFusionne = 0;
@@ -306,15 +315,18 @@ int deplacerBas(int** tab, int n){
     for(i=deb-1; i>=0; i--){
       if(tab[i][j] != 0){
         k=i;
+        //On cherche la case vide la plus en bas
         while(k<deb && tab[k+1][j] == 0){
           k++;
         }
+        //si la case suivante est égale à la tuile qu'on veut déplacer, on les fusionne
         if(k != deb && tab[i][j] == tab[k+1][j]){
           tab[k+1][j] = tab[k+1][j] + tab[i][j];
           tab[i][j] = 0;
           aFusionne = 1;
           valRetour = 1;
         }
+        //sinon on pousse la tuile
         else{
           if(k!=i){
             tmp = tab[i][j];
@@ -335,14 +347,12 @@ int deplacerBas(int** tab, int n){
 int aGagne(int** tab, int n){
   int i;
 	int j;
-  int res;
+  int res; //valeur de retour : 1 si le joueur a gagné, 0 sinon
   res = 0;
-	for (i = 0; i < n; i++)
-	{
-		for (j = 0; j < n; j++)
-		{
-			if (tab[i][j] == 2048)
-			{
+	for (i = 0; i < n; i++){
+		for (j = 0; j < n; j++){
+      //on gagne si une tuile vaut 2048
+			if (tab[i][j] == 2048){
 				res = 1;
 			}
 		}
@@ -354,19 +364,20 @@ int aGagne(int** tab, int n){
 int aPerdu(int** tab, int n){
   int i;
 	int j;
-  int res;
+  int res; //valeur de retour : 1 si le joueur a perdu, 0 sinon
+  int** copieTab; //la copie du plateau
   res = 1;
-	for (i = 0; i < n; i++)
-	{
-		for (j = 0; j < n; j++)
-		{
-			if (tab[i][j] == 0)
-			{
+  copieTab = copieTab2D(tab, n);
+	for (i = 0; i < n; i++){
+		for (j = 0; j < n; j++){
+      //l'utilisateur n'a pas perdu s'il reste au moins une tuile vide
+			if (copieTab[i][j] == 0){
 				res = 0;
 			}
 		}
 	}
-  if (res == 1 && (deplacerBas(tab, n) || deplacerHaut(tab, n) || deplacerDroite(tab, n) || deplacerGauche(tab, n))){
+  //l'utilisateur n'a pas perdu s'il reste des déplacements possibles
+  if (res == 1 && (deplacerBas(copieTab, n) || deplacerHaut(copieTab, n) || deplacerDroite(copieTab, n) || deplacerGauche(copieTab, n))){
     res = 0;
   }
   return(res);
